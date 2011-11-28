@@ -1,0 +1,48 @@
+<?page title="Employee manager" contentType="text/html;charset=UTF-8"?>
+
+<div id="employeediv"
+	apply="org.zkoss.bind.BindComposer"
+	viewModel="@bind(vm='org.zkoss.employeemvvm.viewmodel.EmployeeViewModel')"
+	hflex="true">
+
+	<vlayout>
+		<listbox id="lstEmployee" multiple="true" rows="5"
+			model="@bind(vm.employees)"
+			selectedItem="@bind(vm.selected)">
+			<auxhead>
+				<auxheader label="Employees" colspan="4" />
+			</auxhead>
+			<listhead>
+				<listheader label="ID" hflex="2" />
+				<listheader label="First Name" hflex="3" />
+				<listheader label="Last Name" hflex="3" />
+				<listheader label="Age" hflex="1" />
+			</listhead>
+			<template name="model" var="employee">
+				<listitem>
+					<listcell label="@bind(employee.id)" />
+					<listcell label="@bind(employee.firstName)" />
+					<listcell label="@bind(employee.lastName)" />
+					<listcell label="@bind(employee.age)" />
+				</listitem>
+			</template>
+		</listbox>
+
+		<groupbox hflex="true">
+			<caption label="Employee" />
+			First Name:
+			<textbox id="txtFirstName" cols="20" value="@bind(vm.selected.firstName)" />
+			Last Name:
+			<textbox id="txtLastName" cols="20" value="@bind(vm.selected.lastName)" />
+			Age:
+			<intbox id="intAge" cols="3"  value="@bind(vm.selected.age)" />
+			<button id="btnAddEmployee" label="Add" width="60px"
+				height="24px" onClick="@bind('add')"/>
+			<button id="btnUpdateEmployee" label="Update" width="60px"
+				height="24px" onClick="@bind('update')"/>
+			<button id="btnDeleteEmployee" label="Delete" width="60px"
+				height="24px" onClick="@bind('remove')"/>
+			<label style="color:red" value="@bind(vm.error)" />
+		</groupbox>
+	</vlayout>
+</div>
