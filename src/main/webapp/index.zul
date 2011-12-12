@@ -2,7 +2,7 @@
 
 <div id="employeediv"
 	apply="org.zkoss.bind.BindComposer"
-	viewModel="@bind(vm='org.zkoss.employeemvvm.viewmodel.EmployeeViewModel')"
+	viewModel="@id('vm') @init('org.zkoss.employeemvvm.viewmodel.EmployeeViewModel')"
 	hflex="true">
 
 	<vlayout>
@@ -37,11 +37,11 @@
 			Age:
 			<intbox id="intAge" cols="3"  value="@bind(vm.selected.age)" />
 			<button id="btnAddEmployee" label="Add" width="60px"
-				height="24px" onClick="@bind('add')"/>
+				height="24px" onClick="@command('add')"/>
 			<button id="btnUpdateEmployee" label="Update" width="60px"
-				height="24px" onClick="@bind('update')"/>
+				height="24px" onClick="@command('update')"/>
 			<button id="btnDeleteEmployee" label="Delete" width="60px"
-				height="24px" onClick="@bind('remove')"/>
+				height="24px" onClick="@command('remove')"/>
 			<label style="color:red" value="@bind(vm.error)" />
 		</groupbox>
 	</vlayout>

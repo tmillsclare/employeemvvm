@@ -8,7 +8,7 @@
 	<url>http://maven.apache.org</url>
 
 	<properties>
-		<zk.version>6.0.0-RC</zk.version>
+		<zk.version>6.0.0-RC2</zk.version>
 		<zkel.version>1.1.0</zkel.version>
 		<commons-lang.version>2.4</commons-lang.version>
 		<bsh.version>2.0b4</bsh.version>
@@ -53,7 +53,7 @@
 		</dependency>
 		<dependency>
 			<groupId>org.zkoss.zk</groupId>
-			<artifactId>zbind</artifactId>
+			<artifactId>zkbind</artifactId>
 			<version>${zk.version}</version>
 		</dependency>
 		<dependency>

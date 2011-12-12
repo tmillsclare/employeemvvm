@@ -1,6 +1,7 @@
 package org.zkoss.employeemvvm.viewmodel;
 
-import org.zkoss.bind.NotifyChange;
+import org.zkoss.bind.annotation.Command;
+import org.zkoss.bind.annotation.NotifyChange;
 import org.zkoss.employeemvvm.bean.Employee;
 import org.zkoss.employeemvvm.service.EmployeeService;
 import org.zkoss.employeemvvm.utils.Messages;
@@ -23,6 +24,9 @@ public class EmployeeViewModel {
 	
 	@NotifyChange("error")
 	public void setError(String error) {
+		if(error != null)
+			log.error(error);
+		
 		_error = error;
 	}
 	
@@ -44,6 +48,7 @@ public class EmployeeViewModel {
 		return _model;
 	}
 	
+	@Command
 	@NotifyChange({"employees", "selected"})
 	public void add() {
 		Employee employee = new Employee(_selected.getFirstName(), _selected.getLastName(), _selected.getAge());
@@ -51,6 +56,7 @@ public class EmployeeViewModel {
 		setSelected(employee);
 	}
 	
+	@Command
 	@NotifyChange({"employees", "error", "selected"})
 	public void update() {
 		boolean success = false;
@@ -69,13 +75,12 @@ public class EmployeeViewModel {
 		}
 	
 		if(!success) {
-			String error;
-			setError(error = Messages.getString("EmployeeController.2"));
-			log.error(error);
+			setError(Messages.getString("EmployeeController.2"));
 		}
 	
 	}
 	
+	@Command
 	@NotifyChange({"employees", "error", "selected"})
 	public void remove() {
 
@@ -92,9 +97,7 @@ public class EmployeeViewModel {
 		}
 	
 		if(!success) {
-			String error;
-			setError(error = Messages.getString("EmployeeController.4"));
-			log.error(error);
+			setError(Messages.getString("EmployeeController.4"));
 		}
 
 	}
