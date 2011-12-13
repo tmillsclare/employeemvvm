@@ -13,7 +13,7 @@ public class EmployeeViewModel {
 
 	private static final Log log = Log.lookup(EmployeeViewModel.class);
 	
-	private Employee _selected;
+	private Employee _selected, _newEmployee = new Employee();
 	private ListModelList<Employee> _model = EmployeeService.INSTANCE.getModel();
 	
 	private String _error = null;
@@ -30,18 +30,17 @@ public class EmployeeViewModel {
 		_error = error;
 	}
 	
-	public Employee getSelected() {
-		return _selected;
+	public Employee getNewEmployee() {
+		return _newEmployee;
 	}
 	
+	public Employee getSelected() {
+		return _selected;
+	}	
 	
 	@NotifyChange("selected")
 	public void setSelected(Employee selected) {		
-		if(selected != null) {
-			this._selected = selected.copy();
-		} else {
-			selected = null;
-		}
+		_selected = selected;
 	}
 
 	public ListModel<Employee> getEmployees() {
@@ -51,9 +50,11 @@ public class EmployeeViewModel {
 	@Command
 	@NotifyChange({"employees", "selected"})
 	public void add() {
-		Employee employee = new Employee(_selected.getFirstName(), _selected.getLastName(), _selected.getAge());
-		_model.add(employee);
-		setSelected(employee);
+		Employee myNewEmployee = new Employee(_newEmployee.getFirstName(),
+											  _newEmployee.getLastName(),
+											  _newEmployee.getAge());
+		_model.add(myNewEmployee);
+		setSelected(myNewEmployee);
 	}
 	
 	@Command

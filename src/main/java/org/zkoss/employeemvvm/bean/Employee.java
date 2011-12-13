@@ -18,6 +18,10 @@ public class Employee {
 		this(UUID.randomUUID().toString(), firstName, lastName, age);
 	}
 
+	public Employee() {
+		this(null, null, 0);
+	}
+
 	public String getId() {
 		return _uuid;
 	}
